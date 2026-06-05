@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Groupe CTA — Site v2
 
-## Getting Started
+Refonte du site du **Groupe CTA** (Toulouse) : portail vitrine et plateforme de
+redirection vers les 4 sociétés du groupe (CTA Business Travel, CTA Meeting &
+Events, CTA Voyages, SOP Events). Design inspiré du thème *Ikonik*.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (config CSS-first dans `src/app/globals.css`)
+- **Framer Motion** (animations au scroll)
+- **Resend** (envoi des e-mails du formulaire de contact)
+- Polices : **Roboto** (titres) + **Open Sans** (textes) via `next/font`
+
+## Démarrage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # puis renseigner les variables
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables d'environnement
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Voir [`.env.example`](.env.example). Le formulaire fonctionne sans clé en
+développement (les messages sont alors logués dans la console au lieu d'être envoyés).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+- `src/lib/site.ts` — **données centralisées** : coordonnées, sociétés, liens de
+  redirection, navigation, chiffres clés. **C'est ici qu'on met à jour le contenu.**
+- `src/components/` — composants UI, layout (Header/Footer) et sections.
+- `src/app/` — pages (App Router), API route `contact`, `sitemap`, `robots`.
 
-To learn more about Next.js, take a look at the following resources:
+## À compléter avant mise en production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] Remplacer le logo textuel par le **logo officiel** (`src/components/Logo.tsx`).
+- [ ] Renseigner les **vraies URLs** des sites des sociétés (`src/lib/site.ts`).
+- [ ] Vérifier l'**adresse e-mail** de réception et les **horaires**.
+- [ ] Affiner les **coordonnées GPS** pour la carte Google.
+- [ ] Compléter les **mentions légales** (SIREN, RCS, directeur de publication).
+- [ ] Faire valider la **politique de confidentialité** (RGPD).
+- [ ] Remplacer les **avis clients** par de vrais témoignages.
+- [ ] Créer la **fiche Google Business Profile** (nom, adresse, photos, lien site).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement (Vercel)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Pousser le dépôt sur GitHub.
+2. Importer le projet sur [vercel.com](https://vercel.com) (détection Next.js auto).
+3. Ajouter les variables d'environnement (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`).
+4. Déployer puis brancher le domaine `groupe-cta.com`.
