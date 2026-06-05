@@ -39,6 +39,7 @@ export type Entity = {
   cover: string; // image d'en-tête de la carte (dans /public/hero)
   brand: "cta" | "sop";
   accent: "red" | "blue" | "magenta";
+  linkedin?: string; // page LinkedIn de la société (laisser vide si non disponible)
 };
 
 /**
@@ -59,6 +60,7 @@ export const entities: Entity[] = [
     cover: "/hero/agence-voyage-affaire.jpg",
     brand: "cta",
     accent: "blue",
+    linkedin: "https://www.linkedin.com/company/cta-business-travel",
   },
   {
     slug: "cta-meeting-events",
@@ -73,6 +75,7 @@ export const entities: Entity[] = [
     cover: "/hero/agence-evenementielle.jpg",
     brand: "cta",
     accent: "red",
+    linkedin: "https://www.linkedin.com/company/cta-meeting-events",
   },
   {
     slug: "cta-voyages",
@@ -87,6 +90,7 @@ export const entities: Entity[] = [
     cover: "/hero/agence-voyage-individuel.jpg",
     brand: "cta",
     accent: "magenta",
+    linkedin: "https://www.linkedin.com/company/cta-voyages",
   },
   {
     slug: "sop-events",
@@ -101,6 +105,7 @@ export const entities: Entity[] = [
     cover: "/hero/agence-teambuilding.jpg",
     brand: "sop",
     accent: "red",
+    linkedin: "https://www.linkedin.com/company/sopevents",
   },
 ];
 

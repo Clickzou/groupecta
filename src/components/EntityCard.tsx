@@ -55,17 +55,32 @@ export function EntityCard({ entity }: { entity: Entity }) {
 
       {/* Pied : numéro et lien cliquables séparément */}
       <div className="mt-4 flex items-center justify-between gap-3 border-t border-border px-7 pb-7 pt-4 text-sm sm:px-8 sm:pb-8">
-        <a
-          href={telHref(entity.phone)}
-          className="font-semibold text-cta-navy transition-colors hover:text-cta-petrol"
-        >
-          {entity.phone}
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={telHref(entity.phone)}
+            className="font-semibold text-cta-navy transition-colors hover:text-cta-petrol"
+          >
+            {entity.phone}
+          </a>
+          {entity.linkedin && (
+            <a
+              href={entity.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`LinkedIn ${entity.name}`}
+              className="grid h-7 w-7 place-items-center rounded-md bg-cta-blue text-white transition-all hover:ring-2 hover:ring-cta-blue hover:ring-offset-2"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z" />
+              </svg>
+            </a>
+          )}
+        </div>
         <a
           href={entity.url}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center gap-1.5 font-semibold ${a.text} hover:underline`}
+          className="inline-flex items-center gap-1.5 font-semibold text-cta-petrol hover:underline"
         >
           Découvrir le site
           <svg
