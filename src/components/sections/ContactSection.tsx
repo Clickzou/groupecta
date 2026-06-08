@@ -1,12 +1,15 @@
+import Image from "next/image";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../Reveal";
-import { ContactForm } from "../ContactForm";
 import { entities, site } from "@/lib/site";
 
 const mapsQuery = encodeURIComponent(
   `${site.address.street}, ${site.address.postalCode} ${site.address.city}`,
 );
+
+const telHref = (phone: string) =>
+  `tel:+33${phone.replace(/\D/g, "").slice(1)}`;
 
 export function ContactSection() {
   return (
@@ -15,20 +18,60 @@ export function ContactSection() {
         <SectionHeading
           eyebrow="Contact"
           title="Parlons de votre projet"
-          subtitle="Une question, un projet, un rendez-vous ? Notre équipe vous répond et vous oriente vers la bonne société."
+          subtitle="Sélectionnez la société concernée : vous serez redirigé vers son formulaire de contact pour une réponse au plus près de votre besoin."
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Formulaire */}
-          <Reveal className="rounded-[var(--radius-card)] border border-border bg-white p-7 shadow-[var(--shadow-card)] sm:p-9">
+          {/* Redirection vers les formulaires des entités */}
+          <Reveal>
             <h3 className="font-heading text-xl font-bold text-cta-navy">
-              Écrivez-nous
+              Contactez la bonne société
             </h3>
             <p className="mt-2 text-sm text-muted">
-              Les champs marqués d&apos;un astérisque (*) sont obligatoires.
+              Chaque société du groupe traite directement les demandes liées à son expertise.
             </p>
-            <div className="mt-6">
-              <ContactForm />
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {entities.map((e) => (
+                <div
+                  key={e.slug}
+                  className="flex h-full flex-col rounded-[var(--radius-card)] border border-border bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:border-cta-petrol/30"
+                >
+                  <Image
+                    src={e.logo}
+                    alt={e.name}
+                    width={300}
+                    height={80}
+                    className="h-7 w-auto max-w-[70%] object-contain object-left"
+                  />
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{e.tagline}</p>
+                  {e.contactForm ? (
+                    <a
+                      href={e.contactForm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center gap-1.5 font-semibold text-cta-petrol transition-colors hover:underline"
+                    >
+                      Accéder au formulaire
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                        <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <div className="mt-4 text-sm">
+                      <span className="block text-xs font-semibold uppercase tracking-wide text-muted">
+                        Site en cours de production
+                      </span>
+                      <a
+                        href={telHref(e.phone)}
+                        className="mt-1 inline-block font-semibold text-cta-petrol hover:underline"
+                      >
+                        Appeler le {e.phone}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </Reveal>
 
@@ -64,7 +107,7 @@ export function ContactSection() {
                     <span>{e.name}</span>
                     <a
                       className="font-semibold text-cta-navy hover:text-cta-petrol"
-                      href={`tel:+33${e.phone.replace(/\D/g, "").slice(1)}`}
+                      href={telHref(e.phone)}
                     >
                       {e.phone}
                     </a>

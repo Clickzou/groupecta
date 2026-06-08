@@ -17,7 +17,7 @@ const groups = [
       { label: "Le Groupe", href: "/#le-groupe" },
       { label: "Nos sociétés", href: "/#nos-societes" },
       { label: "Chiffres clés", href: "/chiffres-cles" },
-      { label: "Nous découvrir", href: "/nos-convictions" },
+      { label: "Engagement responsable", href: "/engagement-responsable" },
       { label: "Investisseurs", href: "/investisseurs" },
       { label: "Contact", href: "/contact" },
       { label: "Prendre rendez-vous", href: "/prendre-rendez-vous" },

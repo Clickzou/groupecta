@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Counter } from "@/components/Counter";
+import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Container } from "@/components/ui/Container";
@@ -62,51 +63,51 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 type Fig = { icon: string; value?: number; suffix?: string; prefix?: string; decimals?: number; text?: string; label: string };
-type Row = { name: string; color: string; tint: string; light?: boolean; figs: Fig[] };
+// `tab` = fond de l'onglet vertical (couleur ou dégradé) ; `accent` = couleur
+// solide des pastilles (le dégradé ne s'applique pas à une bordure).
+type Row = { name: string; tab: string; accent: string; figs: Fig[] };
 
 const rows: Row[] = [
   {
     name: "CTA Business Travel",
-    color: "#1e445b",
-    tint: "#dbe6ef",
+    tab: "#1481C2",
+    accent: "#1481C2",
     figs: [
-      { icon: "award", value: 30, suffix: "+", label: "ans d'expertise" },
-      { icon: "building", value: 1200, suffix: "+", label: "agences partenaires (réseau TourCom)" },
-      { icon: "tag", value: 1000000, suffix: "+", label: "tarifs négociés dans le monde" },
+      { icon: "award", value: 30, prefix: "+ de ", label: "ans d'expertise" },
+      { icon: "building", value: 1200, prefix: "+ de ", label: "agences partenaires (réseau TourCom)" },
+      { icon: "tag", value: 1000000, prefix: "+ de ", label: "tarifs négociés dans le monde" },
       { icon: "clock", text: "24/7", label: "assistance voyageurs" },
     ],
   },
   {
     name: "CTA Meeting & Events",
-    color: "#cdbb98",
-    tint: "#ece3d2",
-    light: true,
+    tab: "#477ff7",
+    accent: "#477ff7",
     figs: [
-      { icon: "award", value: 20, suffix: "+", label: "ans d'expertise" },
-      { icon: "calendar", value: 170, suffix: "+", label: "événements dans le monde (2025)" },
-      { icon: "globe", value: 45, suffix: "+", label: "destinations (2025)" },
-      { icon: "users", text: "100–5 000", label: "participants par événement" },
+      { icon: "award", value: 20, prefix: "+ de ", label: "ans d'expertise" },
+      { icon: "calendar", value: 170, prefix: "+ de ", label: "événements dans le monde (2025)" },
+      { icon: "globe", value: 45, prefix: "+ de ", label: "destinations (2025)" },
+      { icon: "users", text: "100 à 5 000", label: "participants par événement" },
     ],
   },
   {
     name: "CTA Voyages",
-    color: "#1e76b9",
-    tint: "#dceaf6",
+    tab: "linear-gradient(135deg,#004191 0%,#2974be 55%,#73a6d8 100%)",
+    accent: "#004191",
     figs: [
-      { icon: "award", value: 30, suffix: "+", label: "ans d'expertise (depuis 1992)" },
-      { icon: "globe", value: 90, suffix: "+", label: "pays desservis" },
-      { icon: "users", value: 50000, suffix: "+", label: "voyageurs accompagnés" },
-      { icon: "star", value: 98, suffix: " %", label: "clients satisfaits" },
+      { icon: "award", value: 30, prefix: "+ de ", label: "ans d'expertise" },
+      { icon: "globe", value: 20, prefix: "+ de ", label: "pays desservis" },
+      { icon: "building", text: "1er", label: "réseau européen de voyages (TourCom)" },
     ],
   },
   {
     name: "SOP Events",
-    color: "#084c61",
-    tint: "#d4e6ec",
+    tab: "linear-gradient(135deg,#cb1d48 0%,#dc3d31 100%)",
+    accent: "#cb1d48",
     figs: [
-      { icon: "award", value: 20, suffix: "+", label: "ans d'expertise" },
-      { icon: "calendar", value: 1500, suffix: "+", label: "événements organisés par an" },
-      { icon: "users", text: "10–2 000", label: "personnes par événement" },
+      { icon: "award", value: 20, prefix: "+ de ", label: "ans d'expertise" },
+      { icon: "calendar", value: 1500, prefix: "+ de ", label: "événements organisés par an" },
+      { icon: "users", text: "10 à 2 000", label: "personnes par événement" },
       { icon: "clock", text: "72 h", label: "pour un devis sur-mesure" },
     ],
   },
@@ -138,12 +139,12 @@ function EntityRow({ row, delay }: { row: Row; delay: number }) {
   return (
     <Reveal delay={delay}>
       <div className="flex items-stretch">
-        {/* Onglet vertical */}
+        {/* Onglet vertical (couleur de la société) */}
         <div
           className="flex w-12 shrink-0 items-center justify-center sm:w-16"
-          style={{ background: row.color }}
+          style={{ background: row.tab }}
         >
-          <span className={`whitespace-nowrap py-4 font-heading text-sm font-bold uppercase tracking-wide [writing-mode:vertical-rl] rotate-180 sm:text-base ${row.light ? "text-cta-navy" : "text-white"}`}>
+          <span className="whitespace-nowrap py-4 font-heading text-sm font-bold uppercase tracking-wide text-white [writing-mode:vertical-rl] rotate-180 sm:text-base">
             {row.name}
           </span>
         </div>
@@ -151,7 +152,7 @@ function EntityRow({ row, delay }: { row: Row; delay: number }) {
         {/* Stats */}
         <div className="grid flex-1 grid-cols-2 divide-x divide-y divide-border lg:grid-cols-4 lg:divide-y-0">
           {row.figs.map((f) => (
-            <StatItem key={f.label} fig={f} color={row.color} />
+            <StatItem key={f.label} fig={f} color={row.accent} />
           ))}
         </div>
       </div>
@@ -162,19 +163,21 @@ function EntityRow({ row, delay }: { row: Row; delay: number }) {
 export default function ChiffresClesPage() {
   return (
     <>
-      <Container className="pt-24 text-center sm:pt-28">
-        <Reveal>
-          <h1 className="mx-auto max-w-4xl font-heading text-3xl font-black tracking-tight text-cta-navy sm:text-4xl">
-            Faits et chiffres du Groupe CTA
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
-            Les repères clés de nos sociétés : voyage d&apos;affaires, événementiel,
-            voyage individuel et séminaires.
-          </p>
-        </Reveal>
-      </Container>
+      <PageHeader
+        title="Chiffres clés"
+        subtitle="Les repères clés de nos sociétés : voyage d'affaires, événementiel, voyage sur-mesure et séminaires."
+        image="/hero/banner-chiffres.jpg"
+      />
 
       <section className="relative overflow-hidden py-14">
+        <Container className="relative z-10 mb-10 text-center">
+          <Reveal>
+            <h2 className="mx-auto max-w-4xl font-heading text-3xl font-black tracking-tight text-cta-navy sm:text-4xl">
+              Faits et chiffres du Groupe CTA
+            </h2>
+          </Reveal>
+        </Container>
+
         {/* Fond animé thématique dans les zones blanches autour du tableau */}
         <div data-bg-anim aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <span className="absolute left-[1.5%] top-[10%] h-12 w-12 text-cta-navy/[0.06] animate-[floatY_9s_ease-in-out_infinite] [&>svg]:h-full [&>svg]:w-full">{icons.globe}</span>
@@ -195,16 +198,12 @@ export default function ChiffresClesPage() {
           </div>
 
           <p className="mt-6 text-center text-xs text-muted">
-            Chiffres issus des sociétés du Groupe CTA et du réseau TourCom. Les
-            chiffres « CTA Voyages » (voyage individuel) sont des estimations à confirmer.
+            Chiffres issus des sociétés du Groupe CTA et du réseau TourCom.
           </p>
         </Container>
       </section>
 
-      {/* --- Certifications & garanties ---
-          TODO: remplacer les mentions « à compléter » par les références réelles
-          (n° d'immatriculation Atout France, organisme & montant de garantie
-          financière, nom de l'assureur RCP, etc.). */}
+      {/* --- Certifications & garanties (références légales réelles) --- */}
       <section className="bg-surface py-20">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
@@ -224,24 +223,33 @@ export default function ChiffresClesPage() {
             {[
               {
                 title: "Atout France",
-                text: "Immatriculé au registre des opérateurs de voyages et de séjours.",
-                note: "N° IM : à compléter",
+                text: "Immatriculation au registre des opérateurs de voyages et de séjours.",
+                lines: [
+                  { e: "CTA Events", v: "IM031110034" },
+                  { e: "SOP Events", v: "IM031110033" },
+                ],
                 icon: (
                   <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
                 ),
               },
               {
                 title: "Garantie financière",
-                text: "Les fonds que vous nous confiez sont protégés par une garantie financière.",
-                note: "Organisme & montant : à compléter",
+                text: "Les fonds que vous nous confiez sont protégés par une garantie financière (ARCUS).",
+                lines: [
+                  { e: "CTA Events", v: "ARCUS A58005" },
+                  { e: "SOP Events", v: "ARCUS A58045" },
+                ],
                 icon: (
                   <path d="M3 10h18M5 10V7l7-4 7 4v3M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8M9 14h6" />
                 ),
               },
               {
                 title: "Assurance RCP",
-                text: "Couverts par une assurance Responsabilité Civile Professionnelle.",
-                note: "Assureur : à compléter",
+                text: "Responsabilité Civile Professionnelle souscrite auprès de HISCOX.",
+                lines: [
+                  { e: "CTA Events", v: "HISCOX PL-FR-PSC900278430" },
+                  { e: "SOP Events", v: "HISCOX PL-FR-PSC900278419" },
+                ],
                 icon: (
                   <path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6l8-3zM9 12l2 2 4-4" />
                 ),
@@ -249,7 +257,7 @@ export default function ChiffresClesPage() {
               {
                 title: "Réseau TourCom",
                 text: "Membre du 1ᵉʳ réseau de voyage d'affaires en France.",
-                note: "1 200+ agences partenaires",
+                lines: [{ e: "", v: "+ de 1 200 agences partenaires" }],
                 icon: (
                   <path d="M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM7.5 7.5l3 6m6-6l-3 6" />
                 ),
@@ -264,9 +272,14 @@ export default function ChiffresClesPage() {
                   </span>
                   <h3 className="mt-5 font-heading text-lg font-bold text-cta-navy">{c.title}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{c.text}</p>
-                  <p className="mt-4 border-t border-border pt-3 text-xs font-semibold text-cta-petrol">
-                    {c.note}
-                  </p>
+                  <ul className="mt-4 space-y-1 border-t border-border pt-3 text-xs">
+                    {c.lines.map((l) => (
+                      <li key={l.v} className="text-cta-petrol">
+                        {l.e && <span className="font-semibold text-cta-navy">{l.e} : </span>}
+                        <span className="font-semibold">{l.v}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -302,9 +315,9 @@ export default function ChiffresClesPage() {
                 icon: <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />,
               },
               {
-                title: "Une assistance 24/7",
-                text: "Une équipe disponible à tout moment pour accompagner vos voyageurs, où qu'ils soient.",
-                icon: <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2" />,
+                title: "Une expertise métiers depuis plus de 30 ans",
+                text: "Depuis plus de 30 ans, nous créons bien plus que des voyages et des événements : nous forgeons des expériences qui rapprochent, inspirent et marquent les esprits.",
+                icon: <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4" />,
               },
               {
                 title: "La proximité",

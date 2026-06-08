@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/accompagner-nos-clients",
     ...services.map((s) => `/accompagner-nos-clients/${s.slug}`),
     "/chiffres-cles",
-    "/nos-convictions",
+    "/engagement-responsable",
     "/investisseurs",
     "/contact",
     "/prendre-rendez-vous",

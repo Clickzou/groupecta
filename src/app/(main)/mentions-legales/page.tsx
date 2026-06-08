@@ -31,6 +31,27 @@ export default function MentionsLegalesPage() {
             </p>
           </div>
           <div>
+            <h2 className="font-heading text-xl font-bold text-cta-navy">Immatriculation &amp; garanties</h2>
+            <p className="mt-2">
+              Les sociétés du groupe exerçant une activité d&apos;opérateur de voyages et de
+              séjours sont immatriculées au registre Atout France et couvertes par une
+              garantie financière ainsi qu&apos;une assurance Responsabilité Civile
+              Professionnelle :
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>
+                <strong className="text-cta-navy">CTA Events</strong> — Atout France :
+                IM031110034 · Garantie financière : ARCUS A58005 · RCP : HISCOX
+                PL-FR-PSC900278430
+              </li>
+              <li>
+                <strong className="text-cta-navy">SOP Events</strong> — Atout France :
+                IM031110033 · Garantie financière : ARCUS A58045 · RCP : HISCOX
+                PL-FR-PSC900278419
+              </li>
+            </ul>
+          </div>
+          <div>
             <h2 className="font-heading text-xl font-bold text-cta-navy">Hébergement</h2>
             <p className="mt-2">
               Site hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789,

@@ -17,7 +17,7 @@ export const site = {
     city: "Toulouse",
     country: "France",
   },
-  email: "contact@groupe-cta.com", // TODO: confirmer l'adresse de réception
+  email: "contact@sop-events.fr", // adresse active du groupe (l'ancienne contact@groupe-cta.com n'est pas active)
   // Coordonnées GPS approximatives du quartier de Fenouillet (à affiner pour Google Maps)
   geo: { lat: 43.6435, lng: 1.4256 },
   social: {
@@ -40,6 +40,10 @@ export type Entity = {
   brand: "cta" | "sop";
   accent: "red" | "blue" | "magenta";
   linkedin?: string; // page LinkedIn de la société (laisser vide si non disponible)
+  hover: string; // arrière-plan (CSS) appliqué au survol de la carte société
+  bar: string; // couleur du trait sous le titre de la carte
+  contactForm?: string; // formulaire de contact de l'entité (vide si site en cours)
+  noSite?: boolean; // true si le site n'est pas encore en ligne (ex. CTA Voyages)
 };
 
 /**
@@ -61,6 +65,9 @@ export const entities: Entity[] = [
     brand: "cta",
     accent: "blue",
     linkedin: "https://www.linkedin.com/company/cta-business-travel",
+    hover: "#1481C2",
+    bar: "#1481C2",
+    contactForm: "https://ctabusinesstravel.com/contact",
   },
   {
     slug: "cta-meeting-events",
@@ -74,23 +81,30 @@ export const entities: Entity[] = [
     logo: "/logos/cta-meeting-events.png",
     cover: "/hero/agence-evenementielle.jpg",
     brand: "cta",
-    accent: "red",
+    accent: "blue",
     linkedin: "https://www.linkedin.com/company/cta-meeting-events",
+    hover: "#477ff7",
+    bar: "#477ff7",
+    contactForm: "https://ctameetingevents.fr/contact/",
   },
   {
     slug: "cta-voyages",
     name: "CTA Voyages",
-    tagline: "Agence de voyages",
+    tagline: "Agence de voyages sur-mesure",
     description:
-      "Agence de voyages créée en 1992, proposant les voyages individuels des plus grands voyagistes.",
+      "Agence de voyages créée il y a plus de 30 ans, proposant des voyages sur-mesure et les séjours des plus grands voyagistes. Intégrée au 1er réseau européen de voyages via TourCom.",
     phone: "05 34 39 13 91",
     hours: "Lun–Ven : 10h–13h, sur rendez-vous",
     url: "https://www.cta-events.com/",
     logo: "/logos/cta-voyages.png",
     cover: "/hero/agence-voyage-individuel.jpg",
     brand: "cta",
-    accent: "magenta",
+    accent: "blue",
     linkedin: "https://www.linkedin.com/company/cta-voyages",
+    hover: "linear-gradient(135deg,#004191 0%,#2974be 55%,#73a6d8 100%)",
+    bar: "#004191",
+    // Site en cours de production : aucun lien externe pour l'instant (demande client)
+    noSite: true,
   },
   {
     slug: "sop-events",
@@ -104,8 +118,11 @@ export const entities: Entity[] = [
     logo: "/logos/sop-events.png",
     cover: "/hero/agence-teambuilding.jpg",
     brand: "sop",
-    accent: "red",
+    accent: "magenta",
     linkedin: "https://www.linkedin.com/company/sopevents",
+    hover: "linear-gradient(135deg,#cb1d48 0%,#dc3d31 100%)",
+    bar: "#cb1d48",
+    contactForm: "https://sop-events.fr/devis-sur-mesure-evenementiel/",
   },
 ];
 
@@ -118,13 +135,12 @@ export const nav: NavItem[] = [
   { label: "Le Groupe", href: "/#le-groupe" },
   { label: "Nos sociétés", href: "/#nos-societes" },
   { label: "Chiffres clés", href: "/chiffres-cles" },
-  { label: "Nous découvrir", href: "/nos-convictions" },
   {
     label: "Accompagner nos clients",
     href: "/accompagner-nos-clients",
     children: [
       { label: "Voyage d'affaires", href: "/accompagner-nos-clients/voyage-d-affaires" },
-      { label: "Voyage individuel", href: "/accompagner-nos-clients/voyage-individuel" },
+      { label: "Voyage sur-mesure", href: "/accompagner-nos-clients/voyage-sur-mesure" },
       { label: "Séminaire & team building", href: "/accompagner-nos-clients/seminaire-team-building" },
       { label: "Conférence & congrès", href: "/accompagner-nos-clients/conference-congres" },
     ],
@@ -197,9 +213,9 @@ export const hero = {
 
 // `value` = cible numérique du compteur animé ; `prefix`/`suffix` = symboles affichés.
 export const stats = [
-  { value: 30, prefix: "", suffix: "+", label: "ans d'expertise" },
+  { value: 30, prefix: "+ de ", suffix: "", label: "ans d'expertise" },
   { value: 4, prefix: "", suffix: "", label: "sociétés spécialisées" },
-  { value: 120, prefix: "+", suffix: "", label: "sociétés en compte" },
+  { value: 120, prefix: "+ de ", suffix: "", label: "sociétés en compte" },
   { value: 100, prefix: "", suffix: "%", label: "sur-mesure" },
 ] as const;
 
@@ -212,6 +228,8 @@ export type Service = {
   cover: string;
   points: string[];
   entitySlug: string;
+  /** Dégradé de marque (CSS) appliqué en voile sur l'image du hero. */
+  theme: string;
   links?: { label: string; href: string }[];
 };
 
@@ -222,7 +240,7 @@ export const services: Service[] = [
     short: "Optimisez les déplacements professionnels de vos équipes.",
     intro:
       "Nous prenons en charge l'ensemble des déplacements professionnels de vos collaborateurs : réservation, suivi, maîtrise des coûts et assistance permanente, en France comme à l'international.",
-    cover: "/hero/agence-voyage-affaire.jpg",
+    cover: "/hero/cover-voyage-affaires.jpg",
     points: [
       "Tarifs négociés via le 1er réseau de voyage d'affaires en France (TourCom)",
       "Assistance voyageurs 24/7",
@@ -231,6 +249,7 @@ export const services: Service[] = [
       "Politique voyage sur-mesure",
     ],
     entitySlug: "cta-business-travel",
+    theme: "linear-gradient(130deg,#16425b 0%,#0277bd 100%)",
     links: [
       { label: "Mon voyage d'affaires", href: "https://ctabusinesstravel.com/services" },
       { label: "CTA Business Connect", href: "https://ctabusinesstravel.com/cta-business-connect" },
@@ -243,27 +262,22 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "voyage-individuel",
-    title: "Voyage individuel",
-    short: "Des voyages sur-mesure conçus par des experts depuis 1992.",
+    slug: "voyage-sur-mesure",
+    title: "Voyage sur-mesure",
+    short: "Des voyages sur-mesure conçus par des experts depuis plus de 30 ans.",
     intro:
-      "Agence de voyages créée en 1992, nous imaginons vos voyages individuels et sur-mesure en nous appuyant sur les plus grands voyagistes.",
-    cover: "/hero/agence-voyage-individuel.jpg",
+      "Agence de voyages créée il y a plus de 30 ans, nous imaginons vos voyages sur-mesure en nous appuyant sur les plus grands voyagistes et sur le 1er réseau européen de voyages (TourCom).",
+    cover: "/hero/cover-voyage-sur-mesure.jpg",
     points: [
-      "Conseil d'experts depuis 1992",
+      "Plus de 30 ans d'expertise",
       "Sélection des plus grands voyagistes",
-      "Voyages individuels sur-mesure",
+      "Voyages sur-mesure et individuels",
+      "1er réseau européen de voyages (TourCom)",
       "Accompagnement personnalisé de A à Z",
     ],
     entitySlug: "cta-voyages",
-    links: [
-      { label: "Circuits", href: "https://www.cta-events.com/products/type/circuits" },
-      { label: "Croisières", href: "https://www.cta-events.com/products/type/croisieres" },
-      { label: "Séjours balnéaires", href: "https://www.cta-events.com/products/type/sejours-balneaires" },
-      { label: "Séjours nature", href: "https://www.cta-events.com/products/type/sejours-nature" },
-      { label: "Voyages sur mesure", href: "https://www.cta-events.com/products/tailor_made" },
-      { label: "Promotions", href: "https://www.cta-events.com/products/promotions" },
-    ],
+    theme: "linear-gradient(130deg,#004191 0%,#2974be 60%,#73a6d8 100%)",
+    // Site CTA Voyages en cours de production : pas de liens externes pour l'instant.
   },
   {
     slug: "seminaire-team-building",
@@ -271,7 +285,7 @@ export const services: Service[] = [
     short: "Fédérez vos équipes en France et à l'international.",
     intro:
       "Séminaires, team buildings, incentives et soirées d'entreprise : nous concevons des événements qui motivent et rassemblent vos équipes, partout dans le monde.",
-    cover: "/hero/agence-teambuilding.jpg",
+    cover: "/hero/cover-seminaire.jpg",
     points: [
       "Plus de 20 ans d'expertise événementielle",
       "Événements de 10 à 2 000 personnes",
@@ -280,6 +294,7 @@ export const services: Service[] = [
       "Incentives, séminaires et soirées d'entreprise",
     ],
     entitySlug: "sop-events",
+    theme: "linear-gradient(130deg,#cb1d48 0%,#dc3d31 100%)",
     links: [
       { label: "Séminaire d'entreprise", href: "https://sop-events.fr/forfaits/seminaire-entreprise/" },
       { label: "Team building", href: "https://sop-events.fr/forfaits/organisation-team-building-entreprise/" },
@@ -296,7 +311,7 @@ export const services: Service[] = [
     short: "Conventions et congrès professionnels, de 100 à 5 000+ participants.",
     intro:
       "Nous concevons et organisons vos conférences, conventions et congrès professionnels de bout en bout, de 100 à plus de 5 000 participants.",
-    cover: "/hero/agence-evenementielle.jpg",
+    cover: "/hero/cover-conference.jpg",
     points: [
       "Plus de 170 événements organisés dans le monde (2025)",
       "45 destinations différentes (2025)",
@@ -305,6 +320,7 @@ export const services: Service[] = [
       "Gestion logistique et technique de A à Z",
     ],
     entitySlug: "cta-meeting-events",
+    theme: "linear-gradient(130deg,#1c244b 0%,#477ff7 100%)",
     links: [
       { label: "Tous les types d'événements", href: "https://ctameetingevents.fr/types-evenements/" },
       { label: "Séminaires", href: "https://ctameetingevents.fr/types-evenements/" },

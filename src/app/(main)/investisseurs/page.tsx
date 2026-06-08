@@ -3,7 +3,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/Reveal";
 import { ContactForm } from "@/components/ContactForm";
-import { site } from "@/lib/site";
+
+// Adresse dédiée aux contacts investisseurs (fournie par le client)
+const investorEmail = "jjc@cta-events.com";
 
 export const metadata: Metadata = {
   title: "Investisseurs",
@@ -32,6 +34,7 @@ export default function InvestisseursPage() {
       <PageHeader
         title="Investisseurs"
         subtitle="Le Groupe CTA est en pleine expansion. Participez à notre développement."
+        image="/hero/banner-investisseurs.jpg"
       />
 
       <section className="py-20">
@@ -75,8 +78,8 @@ export default function InvestisseursPage() {
             </p>
             <p className="mt-4 text-sm text-muted">
               Vous pouvez aussi nous écrire directement à{" "}
-              <a className="font-semibold text-cta-petrol hover:underline" href={`mailto:${site.email}`}>
-                {site.email}
+              <a className="font-semibold text-cta-petrol hover:underline" href={`mailto:${investorEmail}`}>
+                {investorEmail}
               </a>
               .
             </p>

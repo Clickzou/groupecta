@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/Reveal";
-import { services } from "@/lib/site";
+import { services, entities } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Accompagner nos clients",
@@ -18,7 +18,22 @@ export default function AccompagnerPage() {
       <PageHeader
         title="Accompagner nos clients"
         subtitle="Une réponse complète à tous vos besoins, du déplacement professionnel à l'événementiel."
-      />
+        image="/hero/banner-accompagner.jpg"
+      >
+        {/* Logos des quatre sociétés du groupe */}
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          {entities.map((e) => (
+            <Image
+              key={e.slug}
+              src={e.logo}
+              alt={e.name}
+              width={320}
+              height={90}
+              className="h-8 w-auto object-contain brightness-0 invert sm:h-9"
+            />
+          ))}
+        </div>
+      </PageHeader>
 
       <section className="py-20">
         <Container>

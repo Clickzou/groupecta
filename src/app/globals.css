@@ -18,8 +18,10 @@
   --color-cta-magenta: #cc1c49;
   --color-cta-blue: #1e76b9;
   --color-cta-navy: #1e445b;
-  --color-cta-petrol: #084c61;
-  --color-cta-petrol-light: #0a6182;
+  /* Couleur de thème générale du site (demande client) */
+  --color-cta-petrol: #0a6182;
+  --color-cta-petrol-light: #0c7aa0;
+  --color-cta-petrol-dark: #084c61;
 
   /* Rôles sémantiques */
   --color-primary: #bd1818;

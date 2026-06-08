@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Container } from "./ui/Container";
 import { Logo } from "./Logo";
-import { SocialLinks } from "./SocialLinks";
 import { entities, nav, site } from "@/lib/site";
 
 export function Footer({ credit = false }: { credit?: boolean }) {
@@ -18,12 +17,7 @@ export function Footer({ credit = false }: { credit?: boolean }) {
             {site.address.street}
             <br />
             {site.address.postalCode} {site.address.city}
-            <br />
-            <a className="hover:text-white" href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
           </address>
-          <SocialLinks itemClassName="bg-white/10 text-white hover:bg-cta-petrol" />
         </div>
 
         <div>

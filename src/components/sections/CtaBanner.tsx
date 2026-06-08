@@ -21,10 +21,10 @@ export function CtaBanner() {
             </p>
             <div className="relative mt-8 flex justify-center">
               <ButtonLink
-                href="/prendre-rendez-vous"
+                href="/contact"
                 className="!bg-white !text-cta-petrol hover:!bg-white/90"
               >
-                Prendre rendez-vous
+                Nous contacter
               </ButtonLink>
             </div>
           </div>

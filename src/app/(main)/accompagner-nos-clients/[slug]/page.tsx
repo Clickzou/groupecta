@@ -36,7 +36,12 @@ export default async function ServicePage({
 
   return (
     <>
-      <PageHeader title={service.title} subtitle={service.short} />
+      <PageHeader
+        title={service.title}
+        subtitle={service.short}
+        image={service.cover}
+        overlay={service.theme}
+      />
 
       <section className="py-20">
         <Container className="grid items-start gap-12 lg:grid-cols-2">
@@ -63,13 +68,16 @@ export default async function ServicePage({
             </ul>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              {entity && (
+              {entity && !entity.noSite && (
                 <ButtonLink href={entity.url} variant="primary">
                   Découvrir {entity.name}
                 </ButtonLink>
               )}
-              <ButtonLink href="/prendre-rendez-vous" variant="outline">
-                Prendre rendez-vous
+              <ButtonLink
+                href={entity?.contactForm ?? "/contact"}
+                variant={entity && !entity.noSite ? "outline" : "primary"}
+              >
+                Nous contacter
               </ButtonLink>
             </div>
           </Reveal>

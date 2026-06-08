@@ -6,7 +6,6 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Logo } from "../Logo";
 import { MusicButton } from "../Music";
-import { SocialLinks } from "../SocialLinks";
 import { ButtonLink } from "../ui/Button";
 import { heroSlides, hero, nav, site, anchorId } from "@/lib/site";
 import { useScrollSpy } from "@/lib/useScrollSpy";
@@ -180,9 +179,8 @@ export function HomeSplash() {
           })}
         </motion.nav>
 
-        <motion.div variants={itemVariants}>
-          <SocialLinks itemClassName="bg-white/10 text-white hover:bg-cta-petrol" />
-        </motion.div>
+        {/* Espaceur bas (les réseaux sociaux ont été retirés : le groupe CTA n'en a pas) */}
+        <motion.div variants={itemVariants} aria-hidden />
       </motion.aside>
 
       {/* ---------- Contenu central : bloc titre encadré + CTA ---------- */}
@@ -224,11 +222,11 @@ export function HomeSplash() {
               Découvrir nos sociétés
             </ButtonLink>
             <ButtonLink
-              href="/prendre-rendez-vous"
+              href="#contact"
               variant="outline"
               className="!border-white/40 !text-white hover:!border-white hover:!text-white"
             >
-              Prendre rendez-vous
+              Nous contacter
             </ButtonLink>
           </div>
         </div>
@@ -289,10 +287,6 @@ export function HomeSplash() {
                 {item.label}
               </Link>
             ))}
-            <SocialLinks
-              className="mt-8"
-              itemClassName="bg-white/10 text-white hover:bg-cta-petrol"
-            />
           </motion.div>
         )}
       </AnimatePresence>

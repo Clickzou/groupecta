@@ -6,7 +6,7 @@ import { Stats } from "@/components/sections/Stats";
 import { GroupIntro } from "@/components/sections/GroupIntro";
 import { EntitiesGrid } from "@/components/sections/EntitiesGrid";
 import { RseSection } from "@/components/sections/RseSection";
-import { Reviews } from "@/components/sections/Reviews";
+import { LocauxSection } from "@/components/sections/LocauxSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ContactSection } from "@/components/sections/ContactSection";
 
@@ -21,7 +21,7 @@ export default function Home() {
         <GroupIntro />
         <EntitiesGrid />
         <RseSection />
-        <Reviews />
+        <LocauxSection />
         <CtaBanner />
         <ContactSection />
       </main>
