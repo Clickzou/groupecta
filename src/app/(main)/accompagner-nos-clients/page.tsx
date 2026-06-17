@@ -38,7 +38,10 @@ export default function AccompagnerPage() {
       <section className="py-20">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2">
-            {services.map((s, i) => (
+            {services.map((s, i) => {
+              const accent =
+                entities.find((e) => e.slug === s.entitySlug)?.bar ?? "var(--color-cta-petrol)";
+              return (
               <Reveal key={s.slug} delay={i * 0.07}>
                 <Link
                   href={`/accompagner-nos-clients/${s.slug}`}
@@ -55,9 +58,14 @@ export default function AccompagnerPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-cta-navy/40 to-transparent" />
                   </div>
                   <div className="flex flex-1 flex-col p-7">
-                    <h2 className="font-heading text-2xl font-bold text-cta-navy">{s.title}</h2>
+                    {/* Filet accent aux couleurs de la société */}
+                    <span className="block h-1 w-10 rounded-full" style={{ background: accent }} />
+                    <h2 className="mt-4 font-heading text-2xl font-bold text-cta-navy">{s.title}</h2>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{s.short}</p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 font-semibold text-cta-petrol">
+                    <span
+                      className="mt-5 inline-flex items-center gap-1.5 font-semibold"
+                      style={{ color: accent }}
+                    >
                       En savoir plus
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden className="transition-transform group-hover:translate-x-1">
                         <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -66,7 +74,8 @@ export default function AccompagnerPage() {
                   </div>
                 </Link>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </Container>
       </section>

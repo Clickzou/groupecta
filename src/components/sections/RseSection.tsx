@@ -103,7 +103,7 @@ export function RseSection() {
                       alt={c.logoAlt}
                       width={120}
                       height={60}
-                      className="absolute inset-0 m-auto h-12 w-12 object-contain p-1.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="absolute inset-0 m-auto h-full w-full object-contain p-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     />
                   </span>
 

@@ -2,28 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
-const KEY = "cta-cookies-consent";
+import { getConsent, setConsent, type ConsentValue } from "@/lib/consent";
 
 /**
  * Bandeau de consentement aux cookies (RGPD).
  * Mémorise le choix dans le localStorage ; ne réapparaît plus ensuite.
+ * Le choix est partagé avec le chargeur de mesure d'audience (Analytics).
  */
 export function CookieConsent() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    try {
-      if (!localStorage.getItem(KEY)) setShow(true);
-    } catch {
-      /* localStorage indisponible : on n'affiche pas */
-    }
+    if (!getConsent()) setShow(true);
   }, []);
 
-  function choose(value: "accepted" | "refused") {
-    try {
-      localStorage.setItem(KEY, value);
-    } catch {}
+  function choose(value: ConsentValue) {
+    setConsent(value);
     setShow(false);
   }
 

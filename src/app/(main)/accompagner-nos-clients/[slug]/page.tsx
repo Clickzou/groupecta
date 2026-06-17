@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
@@ -33,6 +34,7 @@ export default async function ServicePage({
   if (!service) notFound();
 
   const entity = entities.find((e) => e.slug === service.entitySlug);
+  const accent = entity?.bar ?? "var(--color-cta-petrol)";
 
   return (
     <>
@@ -48,7 +50,8 @@ export default async function ServicePage({
           <Reveal>
             <div className="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
               <div className="relative h-80">
-                <Image src={service.cover} alt={service.title} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+                {/* Visuel distinct de celui du header : photo de la société associée. */}
+                <Image src={entity?.cover ?? service.cover} alt={entity?.name ?? service.title} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
               </div>
             </div>
           </Reveal>
@@ -59,7 +62,7 @@ export default async function ServicePage({
             <ul className="mt-7 space-y-3">
               {service.points.map((p) => (
                 <li key={p} className="flex items-start gap-3 text-cta-navy">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="mt-0.5 shrink-0 text-cta-petrol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="mt-0.5 shrink-0" style={{ color: accent }}>
                     <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <span className="text-sm leading-relaxed">{p}</span>
@@ -69,13 +72,21 @@ export default async function ServicePage({
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               {entity && !entity.noSite && (
-                <ButtonLink href={entity.url} variant="primary">
+                <ButtonLink
+                  href={entity.url}
+                  variant="primary"
+                  className="hover:brightness-110"
+                  style={{ background: accent }}
+                >
                   Découvrir {entity.name}
                 </ButtonLink>
               )}
               <ButtonLink
                 href={entity?.contactForm ?? "/contact"}
                 variant={entity && !entity.noSite ? "outline" : "primary"}
+                {...(entity && entity.noSite
+                  ? { className: "hover:brightness-110", style: { background: accent } }
+                  : {})}
               >
                 Nous contacter
               </ButtonLink>
@@ -89,7 +100,7 @@ export default async function ServicePage({
         <section className="bg-surface py-20">
           <Container>
             <Reveal className="mx-auto max-w-2xl text-center">
-              <span className="text-lg font-bold uppercase tracking-[0.18em] text-cta-petrol sm:text-xl">
+              <span className="text-lg font-bold uppercase tracking-[0.18em] sm:text-xl" style={{ color: accent }}>
                 Nos prestations
               </span>
               <h2 className="mt-3 font-heading text-3xl font-black text-cta-navy sm:text-4xl">
@@ -109,10 +120,11 @@ export default async function ServicePage({
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-3 rounded-[var(--radius-card)] border border-border bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:border-cta-petrol/30"
+                  className="group flex items-center justify-between gap-3 rounded-[var(--radius-card)] border border-border bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 [&:hover]:border-[color:var(--accent)]"
+                  style={{ "--accent": accent } as CSSProperties}
                 >
                   <span className="font-semibold text-cta-navy">{l.label}</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="shrink-0 text-cta-petrol transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ color: accent }}>
                     <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
@@ -121,7 +133,12 @@ export default async function ServicePage({
 
             {entity && (
               <div className="mt-10 text-center">
-                <ButtonLink href={entity.url} variant="primary">
+                <ButtonLink
+                  href={entity.url}
+                  variant="primary"
+                  className="hover:brightness-110"
+                  style={{ background: accent }}
+                >
                   Voir le site de {entity.name}
                 </ButtonLink>
               </div>
@@ -130,7 +147,7 @@ export default async function ServicePage({
         </section>
       )}
 
-      <CtaBanner />
+      <CtaBanner accent={accent} />
     </>
   );
 }

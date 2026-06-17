@@ -23,6 +23,7 @@ export function ButtonLink({
   href,
   variant = "primary",
   className = "",
+  style,
   children,
   ...props
 }: {
@@ -38,6 +39,7 @@ export function ButtonLink({
         target="_blank"
         rel="noopener noreferrer"
         className={`${base} ${sizes} ${variants[variant]} ${className}`}
+        style={style}
       >
         {children}
       </a>
@@ -47,6 +49,7 @@ export function ButtonLink({
     <Link
       href={href}
       className={`${base} ${sizes} ${variants[variant]} ${className}`}
+      style={style}
       {...props}
     >
       {children}

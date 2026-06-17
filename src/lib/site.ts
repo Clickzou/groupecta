@@ -65,8 +65,8 @@ export const entities: Entity[] = [
     brand: "cta",
     accent: "blue",
     linkedin: "https://www.linkedin.com/company/cta-business-travel",
-    hover: "#1481C2",
-    bar: "#1481C2",
+    hover: "#0277BD",
+    bar: "#0277BD",
     contactForm: "https://ctabusinesstravel.com/contact",
   },
   {
@@ -83,8 +83,8 @@ export const entities: Entity[] = [
     brand: "cta",
     accent: "blue",
     linkedin: "https://www.linkedin.com/company/cta-meeting-events",
-    hover: "#477ff7",
-    bar: "#477ff7",
+    hover: "#1C244B",
+    bar: "#1C244B",
     contactForm: "https://ctameetingevents.fr/contact/",
   },
   {

@@ -2,16 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "./Logo";
 import { Container } from "./ui/Container";
 import { ButtonLink } from "./ui/Button";
-import { nav, anchorId, type NavItem } from "@/lib/site";
+import { nav, anchorId, services, entities, type NavItem } from "@/lib/site";
 import { useScrollSpy } from "@/lib/useScrollSpy";
 
 const SECTION_IDS = nav
   .map((item) => anchorId(item.href))
   .filter((id): id is string => Boolean(id));
+
+/** Couleur caractéristique de la société liée à un sous-onglet « Accompagner nos clients ». */
+function childAccent(href: string): string {
+  const slug = href.split("/").pop();
+  const service = services.find((s) => s.slug === slug);
+  const entity = entities.find((e) => e.slug === service?.entitySlug);
+  return entity?.bar ?? "var(--color-cta-petrol)";
+}
 
 export function Header({ reveal = false }: { reveal?: boolean }) {
   const pathname = usePathname();
@@ -83,19 +91,24 @@ export function Header({ reveal = false }: { reveal?: boolean }) {
 
                 {item.children && (
                   <div className="invisible absolute left-0 top-full z-50 w-64 translate-y-2 rounded-2xl border border-border bg-white p-2 opacity-0 shadow-[0_20px_50px_-20px_rgba(30,68,91,0.45)] transition-all duration-200 group-hover/dd:visible group-hover/dd:translate-y-0 group-hover/dd:opacity-100">
-                    {item.children.map((child) => (
+                    {item.children.map((child) => {
+                      const accent = childAccent(child.href);
+                      return (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className={`block rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
+                        style={{ "--accent": accent } as CSSProperties}
+                        className={`flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
                           pathname === child.href
-                            ? "bg-surface text-cta-petrol"
-                            : "text-cta-navy/80 hover:bg-surface hover:text-cta-petrol"
+                            ? "bg-surface text-[color:var(--accent)]"
+                            : "text-cta-navy/80 hover:bg-surface hover:text-[color:var(--accent)]"
                         }`}
                       >
+                        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: accent }} />
                         {child.label}
                       </Link>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -139,15 +152,20 @@ export function Header({ reveal = false }: { reveal?: boolean }) {
                 </Link>
                 {item.children && (
                   <div className="ml-3 border-l border-border pl-3">
-                    {item.children.map((child) => (
+                    {item.children.map((child) => {
+                      const accent = childAccent(child.href);
+                      return (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-lg px-4 py-2 text-sm font-medium text-cta-navy/75 hover:bg-surface hover:text-cta-petrol"
+                        style={{ "--accent": accent } as CSSProperties}
+                        className="flex items-center gap-2.5 rounded-lg px-4 py-2 text-sm font-medium text-cta-navy/75 hover:bg-surface hover:text-[color:var(--accent)]"
                       >
+                        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: accent }} />
                         {child.label}
                       </Link>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto, Open_Sans, Outfit, Allura } from "next/font/google";
 import "./globals.css";
 import { CookieConsent } from "@/components/CookieConsent";
+import { Analytics } from "@/components/Analytics";
 import { site } from "@/lib/site";
 
 // Titres : Roboto — Textes : Open Sans (cahier des charges)
@@ -61,6 +62,11 @@ export const metadata: Metadata = {
     url: site.url,
   },
   robots: { index: true, follow: true },
+  // Vérification Google Search Console : renseigner GOOGLE_SITE_VERIFICATION
+  // (jeton de la méthode « balise HTML ») une fois le site en ligne.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 // Données structurées : alimente la fiche Google Business Profile / le SEO local
@@ -100,6 +106,7 @@ export default function RootLayout({
         />
         {children}
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

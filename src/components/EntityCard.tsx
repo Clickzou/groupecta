@@ -30,7 +30,7 @@ export function EntityCard({ entity }: { entity: Entity }) {
           {entity.tagline}
         </h3>
         <span
-          className="mt-3 block h-1 w-12 rounded-full transition-colors duration-300 group-hover:bg-white"
+          className="mt-3 block h-1 w-12 rounded-full transition-colors duration-300 group-hover:!bg-white"
           style={{ background: entity.bar }}
         />
 
@@ -100,7 +100,8 @@ export function EntityCard({ entity }: { entity: Entity }) {
             href={entity.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-semibold text-cta-petrol transition-colors hover:underline group-hover:text-white"
+            className="inline-flex items-center gap-1.5 font-semibold transition-colors hover:underline group-hover:!text-white"
+            style={{ color: entity.bar }}
           >
             Découvrir le site
             <svg
