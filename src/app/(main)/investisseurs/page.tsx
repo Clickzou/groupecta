@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const arguments_ = [
   {
     title: "Un groupe en expansion",
-    text: "Quatre sociétés complémentaires sur des marchés porteurs (voyage d'affaires, événementiel, tourisme) et une dynamique de croissance soutenue.",
+    text: "Quatre entités complémentaires sur des marchés porteurs (voyage d'affaires, événementiel, tourisme) et une dynamique de croissance soutenue.",
   },
   {
     title: "Des positions solides",
@@ -41,7 +41,7 @@ export default function InvestisseursPage() {
         <Container>
           <Reveal className="mx-auto max-w-3xl text-center">
             <p className="text-lg leading-relaxed text-muted">
-              Fort de quatre sociétés spécialisées et d&apos;une expertise reconnue,
+              Fort de quatre entités spécialisées et d&apos;une expertise reconnue,
               le Groupe CTA poursuit une trajectoire de croissance ambitieuse. Nous
               ouvrons le dialogue avec les <strong className="text-cta-navy">fonds
               d&apos;investissement</strong> et les <strong className="text-cta-navy">sociétés

@@ -37,7 +37,7 @@ export function Footer({ credit = false }: { credit?: boolean }) {
 
         <div>
           <h3 className="mb-4 font-heading text-sm font-bold uppercase tracking-wider text-white">
-            Nos sociétés
+            Nos entités
           </h3>
           <ul className="space-y-2 text-sm">
             {entities.map((e) => (

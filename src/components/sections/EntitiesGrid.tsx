@@ -110,7 +110,7 @@ export function EntitiesGrid() {
             transition={{ duration: 0.5, ease }}
             className="inline-block text-lg font-bold uppercase tracking-[0.18em] text-cta-petrol sm:text-xl"
           >
-            Nos sociétés
+            Nos entités
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 44 }}

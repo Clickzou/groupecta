@@ -8,7 +8,7 @@ export const site = {
   name: "Groupe CTA",
   legalName: "Groupe CTA",
   description:
-    "Le Groupe CTA réunit des experts du voyage d'affaires, de l'événementiel professionnel et du tourisme à Toulouse. Découvrez nos sociétés SOP Events et CTA.",
+    "Le Groupe CTA réunit des experts du voyage d'affaires, de l'événementiel professionnel et du tourisme à Toulouse. Découvrez nos entités SOP Events et CTA.",
   url: "https://groupe-cta.com",
   // Adresse du siège (cahier des charges + fiche Google Business Profile)
   address: {
@@ -133,10 +133,10 @@ export type NavItem = { label: string; href: string; children?: NavChild[] };
 export const nav: NavItem[] = [
   { label: "Accueil", href: "/#accueil" },
   { label: "Le Groupe", href: "/#le-groupe" },
-  { label: "Nos sociétés", href: "/#nos-societes" },
+  { label: "Nos entités", href: "/#nos-societes" },
   { label: "Chiffres clés", href: "/chiffres-cles" },
   {
-    label: "Accompagner nos clients",
+    label: "Nos expertises",
     href: "/accompagner-nos-clients",
     children: [
       { label: "Voyage d'affaires", href: "/accompagner-nos-clients/voyage-d-affaires" },
@@ -214,7 +214,7 @@ export const hero = {
 // `value` = cible numérique du compteur animé ; `prefix`/`suffix` = symboles affichés.
 export const stats = [
   { value: 30, prefix: "+ de ", suffix: "", label: "ans d'expertise" },
-  { value: 4, prefix: "", suffix: "", label: "sociétés spécialisées" },
+  { value: 4, prefix: "", suffix: "", label: "entités spécialisées" },
   { value: 120, prefix: "+ de ", suffix: "", label: "sociétés en compte" },
   { value: 100, prefix: "", suffix: "%", label: "sur-mesure" },
 ] as const;
@@ -351,7 +351,7 @@ export const keyStats: { group: string; items: KeyStat[] }[] = [
   {
     group: "Le groupe",
     items: [
-      { value: 4, label: "sociétés spécialisées" },
+      { value: 4, label: "entités spécialisées" },
       { value: 30, suffix: "+", label: "ans d'expertise" },
       { text: "1992", label: "création de CTA Voyages" },
       { text: "24/7", label: "assistance voyageurs" },

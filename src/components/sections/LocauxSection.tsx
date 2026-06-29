@@ -3,7 +3,7 @@ import { Container } from "../ui/Container";
 import { Reveal } from "../Reveal";
 
 const features: { label: string; icon: React.ReactNode }[] = [
-  { label: "Nos 4 sociétés réunies dans un même lieu", icon: <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M9 7h.01M9 11h.01M13 7h.01M13 11h.01M18 21V10h1" /> },
+  { label: "Nos 4 entités réunies dans un même lieu", icon: <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M9 7h.01M9 11h.01M13 7h.01M13 11h.01M18 21V10h1" /> },
   { label: "Salles de réunion équipées", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /></> },
   { label: "Espace cuisine convivial", icon: <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4zM6 2v3M10 2v3M14 2v3" /> },
   { label: "3 niveaux sur 2 000 m²", icon: <path d="m12 2 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5" /> },
@@ -22,10 +22,10 @@ export function LocauxSection() {
             Nos locaux
           </span>
           <h2 className="mt-3 font-heading text-3xl font-black text-cta-navy sm:text-4xl">
-            Quatre sociétés réunies sous un même toit
+            Quatre entités réunies sous un même toit
           </h2>
           <p className="mt-5 leading-relaxed text-muted">
-            À Toulouse, le Groupe CTA rassemble ses quatre sociétés dans un même
+            À Toulouse, le Groupe CTA rassemble ses quatre entités dans un même
             lieu : un cadre de travail moderne et accueillant, pensé pour la
             collaboration des équipes comme pour le confort de nos visiteurs.
           </p>
@@ -61,7 +61,7 @@ export function LocauxSection() {
             <div className="flex flex-col items-center justify-center rounded-[var(--radius-card)] bg-cta-navy p-6 text-center text-white">
               <div className="font-heading text-4xl font-black leading-none">2 000 m²</div>
               <p className="mt-2 text-sm leading-snug text-white/75">
-                répartis sur 3 niveaux, pour nos 4 sociétés.
+                répartis sur 3 niveaux, pour nos 4 entités.
               </p>
             </div>
           </div>

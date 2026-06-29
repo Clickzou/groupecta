@@ -7,7 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { services, entities } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Accompagner nos clients",
+  title: "Nos expertises",
   description:
     "Le Groupe CTA accompagne les entreprises sur le voyage d'affaires, le voyage individuel, les séminaires & team buildings et les conférences & congrès.",
 };
@@ -16,7 +16,7 @@ export default function AccompagnerPage() {
   return (
     <>
       <PageHeader
-        title="Accompagner nos clients"
+        title="Nos expertises"
         subtitle="Une réponse complète à tous vos besoins, du déplacement professionnel à l'événementiel."
         image="/hero/banner-accompagner.jpg"
       >

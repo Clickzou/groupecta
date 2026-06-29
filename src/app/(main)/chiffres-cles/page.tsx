@@ -165,7 +165,7 @@ export default function ChiffresClesPage() {
     <>
       <PageHeader
         title="Chiffres clés"
-        subtitle="Les repères clés de nos sociétés : voyage d'affaires, événementiel, voyage sur-mesure et séminaires."
+        subtitle="Les repères clés de nos entités : voyage d'affaires, événementiel, voyage sur-mesure et séminaires."
         image="/hero/banner-chiffres.jpg"
       />
 
@@ -198,7 +198,7 @@ export default function ChiffresClesPage() {
           </div>
 
           <p className="mt-6 text-center text-xs text-muted">
-            Chiffres issus des sociétés du Groupe CTA et du réseau TourCom.
+            Chiffres issus des entités du Groupe CTA et du réseau TourCom.
           </p>
         </Container>
       </section>

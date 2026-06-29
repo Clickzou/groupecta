@@ -15,7 +15,7 @@ const groups = [
     links: [
       { label: "Accueil", href: "/" },
       { label: "Le Groupe", href: "/#le-groupe" },
-      { label: "Nos sociétés", href: "/#nos-societes" },
+      { label: "Nos entités", href: "/#nos-societes" },
       { label: "Chiffres clés", href: "/chiffres-cles" },
       { label: "Engagement responsable", href: "/engagement-responsable" },
       { label: "Investisseurs", href: "/investisseurs" },
@@ -24,7 +24,7 @@ const groups = [
     ],
   },
   {
-    title: "Accompagner nos clients",
+    title: "Nos expertises",
     links: [
       { label: "Vue d'ensemble", href: "/accompagner-nos-clients" },
       ...services.map((s) => ({

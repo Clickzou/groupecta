@@ -219,7 +219,7 @@ export function HomeSplash() {
           {/* Boutons (fixes) */}
           <div className="mt-2 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonLink href="#nos-societes" variant="primary">
-              Découvrir nos sociétés
+              Découvrir nos entités
             </ButtonLink>
             <ButtonLink
               href="#contact"

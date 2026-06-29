@@ -45,7 +45,7 @@ export function GroupIntro() {
             l&apos;événementiel, en passant par les voyages individuels.
           </h2>
           <p className="mt-5 leading-relaxed text-muted">
-            Basé à Toulouse, le Groupe CTA rassemble des sociétés complémentaires
+            Basé à Toulouse, le Groupe CTA rassemble des entités complémentaires
             sous les marques <strong className="text-cta-navy">SOP</strong> et{" "}
             <strong className="text-cta-navy">CTA</strong>. Cette synergie nous
             permet de couvrir l&apos;ensemble des besoins des entreprises : du
@@ -54,7 +54,7 @@ export function GroupIntro() {
           </p>
           <div className="mt-8">
             <ButtonLink href="#nos-societes" variant="primary">
-              Découvrir nos sociétés
+              Découvrir nos entités
             </ButtonLink>
           </div>
         </Reveal>

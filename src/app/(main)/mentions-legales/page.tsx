@@ -68,7 +68,7 @@ export default function MentionsLegalesPage() {
           <div>
             <h2 className="font-heading text-xl font-bold text-cta-navy">Immatriculation &amp; garanties</h2>
             <p className="mt-2">
-              Les sociétés du groupe exerçant une activité d&apos;opérateur de voyages et de
+              Les entités du groupe exerçant une activité d&apos;opérateur de voyages et de
               séjours sont immatriculées au registre Atout France et couvertes par une
               garantie financière ainsi qu&apos;une assurance Responsabilité Civile
               Professionnelle :
@@ -112,7 +112,7 @@ export default function MentionsLegalesPage() {
           <div>
             <h2 className="font-heading text-xl font-bold text-cta-navy">Liens hypertextes</h2>
             <p className="mt-2">
-              Ce site peut renvoyer vers les sites des sociétés du groupe et vers des
+              Ce site peut renvoyer vers les sites des entités du groupe et vers des
               sites tiers. Le {site.legalName} n&apos;exerce aucun contrôle sur ces
               ressources externes et décline toute responsabilité quant à leur contenu
               ou à l&apos;usage qui pourrait en être fait.
