@@ -62,12 +62,14 @@ export function ContactSection() {
                       <span className="block text-xs font-semibold uppercase tracking-wide text-muted">
                         Site en cours de production
                       </span>
-                      <a
-                        href={telHref(e.phone)}
-                        className="mt-1 inline-block font-semibold text-cta-petrol hover:underline"
-                      >
-                        Appeler le {e.phone}
-                      </a>
+                      {e.phone && (
+                        <a
+                          href={telHref(e.phone)}
+                          className="mt-1 inline-block font-semibold text-cta-petrol hover:underline"
+                        >
+                          Appeler le {e.phone}
+                        </a>
+                      )}
                     </div>
                   )}
                 </div>
@@ -102,17 +104,19 @@ export function ContactSection() {
                 Par société
               </h4>
               <ul className="mt-3 space-y-2 text-sm text-muted">
-                {entities.map((e) => (
-                  <li key={e.slug} className="flex justify-between gap-3">
-                    <span>{e.name}</span>
-                    <a
-                      className="font-semibold text-cta-navy hover:text-cta-petrol"
-                      href={telHref(e.phone)}
-                    >
-                      {e.phone}
-                    </a>
-                  </li>
-                ))}
+                {entities
+                  .filter((e) => e.phone)
+                  .map((e) => (
+                    <li key={e.slug} className="flex justify-between gap-3">
+                      <span>{e.name}</span>
+                      <a
+                        className="font-semibold text-cta-navy hover:text-cta-petrol"
+                        href={telHref(e.phone!)}
+                      >
+                        {e.phone}
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </div>
 

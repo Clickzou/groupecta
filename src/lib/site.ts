@@ -32,7 +32,7 @@ export type Entity = {
   name: string;
   tagline: string;
   description: string;
-  phone: string;
+  phone?: string; // vide si l'entité n'a pas de standard téléphonique
   hours: string;
   url: string; // site web de l'entité (plateforme de redirection)
   logo: string; // logo officiel dans /public/logos
@@ -75,7 +75,7 @@ export const entities: Entity[] = [
     tagline: "Congrès & événements professionnels",
     description:
       "Conférences, congrès et cérémonies professionnelles de 100 à plus de 5 000 personnes, organisés de A à Z.",
-    phone: "05 34 40 57 65",
+    // Pas de standard téléphonique pour le congrès.
     hours: "Sur rendez-vous",
     url: "https://ctameetingevents.fr/",
     logo: "/logos/cta-meeting-events.png",

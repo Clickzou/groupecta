@@ -75,12 +75,14 @@ export function EntityCard({ entity }: { entity: Entity }) {
       {/* Pied : numéro et lien cliquables séparément */}
       <div className="relative z-10 mt-4 flex items-center justify-between gap-3 border-t border-border px-7 pb-7 pt-4 text-sm transition-colors duration-300 group-hover:border-white/30 sm:px-8 sm:pb-8">
         <div className="flex items-center gap-3">
-          <a
-            href={telHref(entity.phone)}
-            className="font-semibold text-cta-navy transition-colors hover:text-cta-petrol group-hover:text-white"
-          >
-            {entity.phone}
-          </a>
+          {entity.phone && (
+            <a
+              href={telHref(entity.phone)}
+              className="font-semibold text-cta-navy transition-colors hover:text-cta-petrol group-hover:text-white"
+            >
+              {entity.phone}
+            </a>
+          )}
           {entity.linkedin && (
             <a
               href={entity.linkedin}
