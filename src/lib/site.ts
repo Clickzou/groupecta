@@ -43,7 +43,7 @@ export type Entity = {
   hover: string; // arrière-plan (CSS) appliqué au survol de la carte société
   bar: string; // couleur du trait sous le titre de la carte
   contactForm?: string; // formulaire de contact de l'entité (vide si site en cours)
-  noSite?: boolean; // true si le site n'est pas encore en ligne (ex. CTA Voyages)
+  noSite?: boolean; // true si le site de l'entité n'est pas encore en ligne
 };
 
 /**
@@ -95,7 +95,7 @@ export const entities: Entity[] = [
       "Agence de voyages créée il y a plus de 30 ans, proposant des voyages sur-mesure et les séjours des plus grands voyagistes. Intégrée au 1er réseau européen de voyages via TourCom.",
     phone: "05 34 39 13 91",
     hours: "Lun–Ven : 10h–13h, sur rendez-vous",
-    url: "https://www.cta-events.com/",
+    url: "https://cta-voyages.com/",
     logo: "/logos/cta-voyages.png",
     cover: "/hero/agence-voyage-individuel.jpg",
     brand: "cta",
@@ -103,8 +103,7 @@ export const entities: Entity[] = [
     linkedin: "https://www.linkedin.com/company/cta-voyages",
     hover: "linear-gradient(135deg,#004191 0%,#2974be 55%,#73a6d8 100%)",
     bar: "#004191",
-    // Site en cours de production : aucun lien externe pour l'instant (demande client)
-    noSite: true,
+    contactForm: "https://cta-voyages.com/demande-devis",
   },
   {
     slug: "sop-events",

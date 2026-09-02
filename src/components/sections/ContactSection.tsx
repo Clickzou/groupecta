@@ -91,13 +91,6 @@ export function ContactSection() {
                   <br />
                   {site.address.postalCode} {site.address.city}
                 </p>
-                <p>
-                  <span className="font-semibold text-cta-navy">E-mail</span>
-                  <br />
-                  <a className="text-cta-blue hover:underline" href={`mailto:${site.email}`}>
-                    {site.email}
-                  </a>
-                </p>
               </address>
 
               <h4 className="mt-6 font-heading text-sm font-bold uppercase tracking-wide text-cta-navy">
