@@ -85,6 +85,14 @@ export default function ConfidentialitePage() {
               messagerie) agissant en qualité de sous-traitants. Elles ne sont jamais
               vendues à des tiers.
             </p>
+            <p className="mt-2">
+              Dans le cadre de nos activités de communication et de gestion de la
+              relation client, certaines de vos données peuvent transiter par des outils
+              d&apos;automatisation et de traitement hébergés au sein de l&apos;Union
+              Européenne (n8n, Brevo). Ces outils agissent en tant que sous-traitants
+              conformément au RGPD et ne traitent vos données que pour les finalités
+              décrites dans la présente politique.
+            </p>
           </div>
 
           <div>
