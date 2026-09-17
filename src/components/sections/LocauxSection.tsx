@@ -12,6 +12,19 @@ const features: { label: string; icon: React.ReactNode }[] = [
   { label: "Panneaux photovoltaïques", icon: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" /></> },
 ];
 
+/**
+ * Photos du siège, dans l'ordre de la mosaïque. `order` place l'encart
+ * « 2 000 m² » (order-1) juste après le hall, à droite de la 3e rangée.
+ */
+const photos: { src: string; alt: string; sizes: string; className?: string; badge?: string }[] = [
+  { src: "/hero/locaux-facade-parking.webp", alt: "Façade du siège du Groupe CTA à Toulouse, avec panneaux photovoltaïques et parking", sizes: "(min-width:1024px) 30vw, 66vw", className: "col-span-2 row-span-2", badge: "Toulouse" },
+  { src: "/hero/locaux-escalier.webp", alt: "Escalier hélicoïdal végétalisé des locaux du Groupe CTA", sizes: "(min-width:1024px) 15vw, 33vw", className: "row-span-2" },
+  { src: "/hero/locaux-hall.webp", alt: "Hall d'accueil du Groupe CTA avec son escalier suspendu", sizes: "(min-width:1024px) 30vw, 66vw", className: "col-span-2" },
+  { src: "/hero/locaux-facade.webp", alt: "Bâtiment du Groupe CTA sur trois niveaux", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
+  { src: "/hero/locaux-hall-ascenseur.webp", alt: "Hall du Groupe CTA côté ascenseur", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
+  { src: "/hero/locaux-hall-escalier.webp", alt: "Espace d'accueil et escalier du siège du Groupe CTA", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
+];
+
 /** Section « Nos locaux » (déplacée de l'ex-page Nous découvrir vers l'accueil). */
 export function LocauxSection() {
   return (
@@ -46,22 +59,26 @@ export function LocauxSection() {
           </div>
         </Reveal>
 
-        {/* Collage photo + encart chiffre */}
+        {/* Mosaïque photo (3 colonnes × 4 rangées) + encart chiffre */}
         <Reveal delay={0.1}>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
-              <Image src="/hero/entree-groupe-cta.webp" alt="Entrée du siège du Groupe CTA à Toulouse" fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover transition-transform duration-700 hover:scale-105" />
-              <span className="absolute right-4 top-4 rounded-full bg-cta-navy/85 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white backdrop-blur">
-                Toulouse
-              </span>
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
-              <Image src="/hero/locaux-groupe-cta.webp" alt="Locaux du Groupe CTA" fill sizes="(min-width:1024px) 22vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
-            </div>
-            <div className="flex flex-col items-center justify-center rounded-[var(--radius-card)] bg-cta-navy p-6 text-center text-white">
-              <div className="font-heading text-4xl font-black leading-none">2 000 m²</div>
-              <p className="mt-2 text-sm leading-snug text-white/75">
-                répartis sur 3 niveaux, pour nos 4 entités.
+          <div className="grid aspect-[3/4] grid-cols-3 grid-rows-4 gap-3 sm:gap-4">
+            {photos.map((p) => (
+              <div
+                key={p.src}
+                className={`relative overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)] ${p.className ?? ""}`}
+              >
+                <Image src={p.src} alt={p.alt} fill sizes={p.sizes} className="object-cover transition-transform duration-700 hover:scale-105" />
+                {p.badge && (
+                  <span className="absolute right-3 top-3 rounded-full bg-cta-navy/85 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white backdrop-blur">
+                    {p.badge}
+                  </span>
+                )}
+              </div>
+            ))}
+            <div className="order-1 flex flex-col items-center justify-center rounded-[var(--radius-card)] bg-cta-navy p-2 text-center text-white sm:p-4">
+              <div className="font-heading text-xl font-black leading-none sm:text-3xl">2 000 m²</div>
+              <p className="mt-1.5 text-[11px] leading-snug text-white/75 sm:text-sm">
+                sur 3 niveaux
               </p>
             </div>
           </div>
