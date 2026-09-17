@@ -13,16 +13,13 @@ const features: { label: string; icon: React.ReactNode }[] = [
 ];
 
 /**
- * Photos du siège, dans l'ordre de la mosaïque. `order` place l'encart
- * « 2 000 m² » (order-1) juste après le hall, à droite de la 3e rangée.
+ * Photos du siège, dans l'ordre de la mosaïque. L'encart
+ * « 2 000 m² » vient ensuite, à droite du hall sur la 3e rangée.
  */
 const photos: { src: string; alt: string; sizes: string; className?: string; badge?: string }[] = [
   { src: "/hero/locaux-facade-parking.webp", alt: "Façade du siège du Groupe CTA à Toulouse, avec panneaux photovoltaïques et parking", sizes: "(min-width:1024px) 30vw, 66vw", className: "col-span-2 row-span-2", badge: "Toulouse" },
   { src: "/hero/locaux-escalier.webp", alt: "Escalier hélicoïdal végétalisé des locaux du Groupe CTA", sizes: "(min-width:1024px) 15vw, 33vw", className: "row-span-2" },
   { src: "/hero/locaux-hall.webp", alt: "Hall d'accueil du Groupe CTA avec son escalier suspendu", sizes: "(min-width:1024px) 30vw, 66vw", className: "col-span-2" },
-  { src: "/hero/locaux-facade.webp", alt: "Bâtiment du Groupe CTA sur trois niveaux", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
-  { src: "/hero/locaux-hall-ascenseur.webp", alt: "Hall du Groupe CTA côté ascenseur", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
-  { src: "/hero/locaux-hall-escalier.webp", alt: "Espace d'accueil et escalier du siège du Groupe CTA", sizes: "(min-width:1024px) 15vw, 33vw", className: "order-2" },
 ];
 
 /** Section « Nos locaux » (déplacée de l'ex-page Nous découvrir vers l'accueil). */
@@ -59,9 +56,9 @@ export function LocauxSection() {
           </div>
         </Reveal>
 
-        {/* Mosaïque photo (3 colonnes × 4 rangées) + encart chiffre */}
+        {/* Mosaïque photo (3 colonnes × 3 rangées) + encart chiffre */}
         <Reveal delay={0.1}>
-          <div className="grid aspect-[3/4] grid-cols-3 grid-rows-4 gap-3 sm:gap-4">
+          <div className="grid aspect-square grid-cols-3 grid-rows-3 gap-3 sm:gap-4">
             {photos.map((p) => (
               <div
                 key={p.src}
@@ -75,7 +72,7 @@ export function LocauxSection() {
                 )}
               </div>
             ))}
-            <div className="order-1 flex flex-col items-center justify-center rounded-[var(--radius-card)] bg-cta-navy p-2 text-center text-white sm:p-4">
+            <div className="flex flex-col items-center justify-center rounded-[var(--radius-card)] bg-cta-navy p-2 text-center text-white sm:p-4">
               <div className="font-heading text-xl font-black leading-none sm:text-3xl">2 000 m²</div>
               <p className="mt-1.5 text-[11px] leading-snug text-white/75 sm:text-sm">
                 sur 3 niveaux
